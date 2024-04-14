@@ -1,0 +1,75 @@
+<div class="packages-container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="20px">
+    <h1>Standard csomagok</h1>
+    <div class="package-list-container" fxFlex fxLayout fxLayoutAlign="start" fxLayoutGap="10px">
+        <mat-card class="package-card" *ngFor="let package of packages">
+            <mat-card-header>
+                <mat-card-title>
+                    <h1>{{package.name}}</h1>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <h3>
+                    {{package.description}}
+                </h3>
+
+            </mat-card-content>
+            <mat-card-actions>
+                <div fxFlex fxLayout="row" fxLayoutAlign="start" fxLayoutGap="30px">
+                    <h2>
+                        {{package.price}} HUF/hó.
+                    </h2>
+                    <button mat-button>További információ</button>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <h1>Állítsd össze saját csomagod!</h1>
+    <h2>Internet csomagok</h2>
+    <div class="package-list-container" fxFlex fxLayout fxLayoutAlign="start" fxLayoutGap="10px">
+        <mat-card class="package-card" *ngFor="let package of packages">
+            <mat-card-header>
+                <mat-card-title>
+                    <h1>{{package.name}}</h1>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <h3>
+                    {{package.description}}
+                </h3>
+
+            </mat-card-content>
+            <mat-card-actions>
+                <div fxFlex fxLayout="row" fxLayoutAlign="start" fxLayoutGap="30px">
+                    <h2>
+                        {{package.price}} HUF/hó.
+                    </h2>
+                    <button mat-button>További információ</button>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <h2>Hang és üzenet csomagok</h2>
+    <div class="package-list-container" fxFlex fxLayout fxLayoutAlign="start" fxLayoutGap="10px">
+        <mat-card class="package-card" *ngFor="let package of packages">
+            <mat-card-header>
+                <mat-card-title>
+                    <h1>{{package.name}}</h1>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <h3>
+                    {{package.description}}
+                </h3>
+
+            </mat-card-content>
+            <mat-card-actions>
+                <div fxFlex fxLayout="row" fxLayoutAlign="start" fxLayoutGap="30px">
+                    <h2>
+                        {{package.price}} HUF/hó.
+                    </h2>
+                    <button mat-button>További információ</button>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

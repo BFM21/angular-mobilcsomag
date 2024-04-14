@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-mobilcsomag": {
+      "hosting": {
+        "angular-mobilcsomag": [
+          "angular-mobilcsomag"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-mobilcsomag"
+  }
+}

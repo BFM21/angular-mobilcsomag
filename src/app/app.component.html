@@ -1,0 +1,37 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <a (click)="closeSideNav(sidenav)" mat-list-item class="nav-link" routerLink="/dashboard"
+        routerLinkActive="active" ariaCurrentWhenActive="page">Dashboard</a>
+      <a (click)="closeSideNav(sidenav)" mat-list-item class="nav-link" routerLink="/packages" routerLinkActive="active"
+        ariaCurrentWhenActive="page">Díjcsomagok</a>
+      <a (click)="closeSideNav(sidenav)" mat-list-item class="nav-link" routerLink="/user-packages"
+        routerLinkActive="active" ariaCurrentWhenActive="page">Saját
+        csomagok</a>
+      <a (click)="closeSideNav(sidenav)" mat-list-item class="nav-link" routerLink="/profile" routerLinkActive="active"
+        ariaCurrentWhenActive="page">Profil</a>
+        <a *ngIf="currentUser" (click)="logout(); closeSideNav(sidenav)" mat-list-item class="nav-link"
+        ariaCurrentWhenActive="page">Kijelentkezés</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <button mat-icon-button fxHide.gt-sm (click)="toggleSideNav(sidenav)">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <a class="navbar-brand" routerLink="/dashboard" routerLinkActive="active"
+        ariaCurrentWhenActive="page">Mobilcsomag</a>
+
+      <div fxFlex fxLayout fxLayoutAlign="flex-end" fxLayoutGap="10px" fxHide.sm fxHide.xs>
+        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active" ariaCurrentWhenActive="page">Dashboard</a>
+        <a class="nav-link" routerLink="/packages" routerLinkActive="active"
+          ariaCurrentWhenActive="page">Díjcsomagok</a>
+        <a class="nav-link" routerLink="/user-packages" routerLinkActive="active" ariaCurrentWhenActive="page">Saját
+          csomagok</a>
+        <a class="nav-link" routerLink="/profile" routerLinkActive="active" ariaCurrentWhenActive="page">Profil</a>
+        <a *ngIf="currentUser" (click)="logout()" class="nav-link" routerLink="/logout" routerLinkActive="active" ariaCurrentWhenActive="page">Kijelentkezés</a>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

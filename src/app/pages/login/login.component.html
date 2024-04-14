@@ -1,0 +1,15 @@
+<div class="form-box">
+    <form [formGroup]="loginForm">
+        <div class="form-group">
+          <label for="emailInput">Email cím</label>
+          <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" formControlName = "email">
+        </div>
+        <div class="form-group">
+          <label for="passwordInput">Jelszó</label>
+          <input type="password" class="form-control" id="passwordInput" formControlName = "password">
+        </div>
+        
+        <button type="submit" (click)="login()" class="btn btn-primary">Bejelentkezés</button>
+      </form>
+      <a [routerLink] ="'/register'">Nincs fiókod? Regisztrálj itt!</a>
+</div>

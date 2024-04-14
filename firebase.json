@@ -1,0 +1,11 @@
+{
+  "hosting": [
+    {
+      "target": "angular-mobilcsomag",
+      "source": ".",
+      "frameworksBackend": {
+        "region": "europe-west1"
+      }
+    }
+  ]
+}
