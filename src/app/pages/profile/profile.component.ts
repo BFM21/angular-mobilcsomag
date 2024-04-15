@@ -19,7 +19,8 @@ export class ProfileComponent {
     firstName: '',
     lastName: '',
     email: '',
-    phoneNumber: ''
+    phoneNumber: '',
+    packages: []
   }
 
   profileForm = new FormGroup({

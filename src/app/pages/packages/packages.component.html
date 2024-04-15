@@ -1,7 +1,7 @@
 <div class="packages-container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="20px">
     <h1>Standard csomagok</h1>
     <div class="package-list-container" fxFlex fxLayout fxLayoutAlign="start" fxLayoutGap="10px">
-        <mat-card class="package-card" *ngFor="let package of packages">
+        <mat-card class="package-card" *ngFor="let package of standardPackages">
             <mat-card-header>
                 <mat-card-title>
                     <h1>{{package.name}}</h1>
@@ -18,7 +18,7 @@
                     <h2>
                         {{package.price}} HUF/hó.
                     </h2>
-                    <button mat-button>További információ</button>
+                    <button mat-button>Csomag beállítása</button>
                 </div>
             </mat-card-actions>
         </mat-card>
@@ -26,7 +26,7 @@
     <h1>Állítsd össze saját csomagod!</h1>
     <h2>Internet csomagok</h2>
     <div class="package-list-container" fxFlex fxLayout fxLayoutAlign="start" fxLayoutGap="10px">
-        <mat-card class="package-card" *ngFor="let package of packages">
+        <mat-card class="package-card" *ngFor="let package of internetPackages">
             <mat-card-header>
                 <mat-card-title>
                     <h1>{{package.name}}</h1>
@@ -43,14 +43,14 @@
                     <h2>
                         {{package.price}} HUF/hó.
                     </h2>
-                    <button mat-button>További információ</button>
+                    <button mat-button>Választás</button>
                 </div>
             </mat-card-actions>
         </mat-card>
     </div>
     <h2>Hang és üzenet csomagok</h2>
     <div class="package-list-container" fxFlex fxLayout fxLayoutAlign="start" fxLayoutGap="10px">
-        <mat-card class="package-card" *ngFor="let package of packages">
+        <mat-card class="package-card" *ngFor="let package of callMessagePackages">
             <mat-card-header>
                 <mat-card-title>
                     <h1>{{package.name}}</h1>
@@ -67,7 +67,7 @@
                     <h2>
                         {{package.price}} HUF/hó.
                     </h2>
-                    <button mat-button>További információ</button>
+                    <button mat-button>Választás</button>
                 </div>
             </mat-card-actions>
         </mat-card>

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Package } from '../../models/Package';
+import { Package, PackageType } from '../../models/Package';
+import { AuthService } from '../../services/auth.service';
+import { PackagesService } from '../../services/packages.service';
 
 @Component({
   selector: 'app-packages',
@@ -7,9 +9,31 @@ import { Package } from '../../models/Package';
   styleUrl: './packages.component.scss'
 })
 export class PackagesComponent {
-  packages: Package[] =[
-    {id:'1', name: 'Kis csomag', description: 'Ez a kis csomag leírása', price: '3000'},
-    {id:'2', name: 'Közepes csomag', description: 'Ez a közepes csomag leírása', price: '6000'},
-    {id:'3', name: 'Nagy csomag', description: 'Ez a nagy csomag leírása', price: '9000'},
-  ]
+
+  standardPackages: Package[] = []
+  internetPackages: Package[] = []
+  callMessagePackages: Package[] = []
+  
+  constructor(private authService: AuthService, private packageService: PackagesService){}
+
+   ngOnInit(){
+    this.packageService.readAllStandard().subscribe(mobilePackages => {
+      for(let mobilePackage in mobilePackages){
+        this.standardPackages.push(mobilePackages[mobilePackage]);
+      }
+    });
+
+    this.packageService.readAllInternet().subscribe(mobilePackages => {
+      for(let mobilePackage in mobilePackages){
+        this.internetPackages.push(mobilePackages[mobilePackage]);
+      }
+    });
+
+    this.packageService.readAllCallMessage().subscribe(mobilePackages => {
+      for(let mobilePackage in mobilePackages){
+        this.callMessagePackages.push(mobilePackages[mobilePackage]);
+      }
+    });
+  }
+  
 }

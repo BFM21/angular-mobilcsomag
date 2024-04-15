@@ -34,7 +34,8 @@ export class RegisterComponent {
           firstName: this.registerForm.get('firstName')?.value,
           lastName: this.registerForm.get('lastName')?.value,
           email: this.registerForm.get('email')?.value,
-          phoneNumber: this.registerForm.get('phoneNumber')?.value
+          phoneNumber: this.registerForm.get('phoneNumber')?.value,
+          packages: []
         };
         this.userService.create(newUser).then(_=>{
 
@@ -42,7 +43,7 @@ export class RegisterComponent {
           console.error(error);
         });
       });
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/dashboard');
     }
     
   }
