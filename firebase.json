@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "angular-mobilcsomag",
-      "source": ".",
+      "public": "dist/angular-mobilcsomag/browser",
       "frameworksBackend": {
         "region": "europe-west1"
       }
