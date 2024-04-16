@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Csomag létrehozása</h2>
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="userPackageForm">
+        <div class="form-group">
+            <div class="form-group">
+                <label for="packageName">Csomag neve</label>
+                <input type="text" class="form-control" id="packageName" formControlName="name" required>
+            </div>
+            <div class="form-group">
+                <label for="packageDescription">Csomag leírása</label>
+                <textarea type="text" class="form-control" id="packageDescription" formControlName="description"></textarea>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="false">Mégse</button>
+    <button mat-button [mat-dialog-close]="{name: userPackageForm.get('name')?.value, description: userPackageForm.get('description')?.value}" cdkFocusInitial>Létrehoz</button>
+</mat-dialog-actions>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { error } from 'console';
 import { DOCUMENT } from '@angular/common';
+import { EventEmitter } from 'stream';
 
 
 @Component({
@@ -46,4 +47,6 @@ export class AppComponent {
     });
     
   }
+
+  
 }

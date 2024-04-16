@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Package, PackageType } from '../models/Package';
+import { UserPackage } from '../models/UserPackage';
 
 @Injectable({
   providedIn: 'root'
@@ -14,24 +15,26 @@ export class PackagesService {
   constructor(private afs: AngularFirestore) { }
 
 
-  create(mobilePackage: Package){
-    return this.afs.collection<Package>(this.userMadePackageCollection).doc(mobilePackage.id).set(mobilePackage);
+  create(userPackage: UserPackage){
+    let id = this.afs.createId();
+    userPackage.id = id;
+    return this.afs.collection<UserPackage>(this.userMadePackageCollection).doc(id).set(userPackage);
   }
  
   readAllStandard(){
-    return this.afs.collection<Package>(this.standardPackageCollection, ref=>ref.orderBy('price', 'asc')).valueChanges();
+    return this.afs.collection<Package>(this.standardPackageCollection, ref=>ref.orderBy('price', 'asc').orderBy('name','desc')).valueChanges();
   }
 
-  readAllUserMade(){
-    return this.afs.collection<Package>(this.userMadePackageCollection, ref=>ref.orderBy('price', 'asc')).valueChanges();
+  readAllUserMade(userId:string){
+    return this.afs.collection<UserPackage>(this.userMadePackageCollection, ref=>ref.where('userId', '==', userId).orderBy('price', 'asc').orderBy('name','desc')).valueChanges();
   }
 
   readAllInternet(){
-    return this.afs.collection<Package>(this.internetPackagesCollection, ref=>ref.orderBy('price', 'asc')).valueChanges();
+    return this.afs.collection<Package>(this.internetPackagesCollection, ref=>ref.orderBy('price', 'asc').orderBy('name','desc')).valueChanges();
   }
 
   readAllCallMessage(){
-    return this.afs.collection<Package>(this.callMessagePackageCollection, ref=>ref.orderBy('price', 'asc')).valueChanges();
+    return this.afs.collection<Package>(this.callMessagePackageCollection, ref=>ref.orderBy('price', 'asc').orderBy('name','desc')).valueChanges();
   }
 
   read(id:string, type: PackageType){

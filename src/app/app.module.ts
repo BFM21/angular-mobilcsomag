@@ -18,6 +18,8 @@ import {MatListModule} from '@angular/material/list';
 import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AuthService } from './services/auth.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {environment} from '../app/environment/environment';
 
 @NgModule({
   declarations: [
@@ -28,14 +30,14 @@ import { AuthService } from './services/auth.service';
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     MatButtonModule,
     FlexLayoutModule,
-    
     MatListModule,
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp({"projectId":"angular-mobilcsomag","appId":"1:281224202241:web:2778a109a80441e8b91800","databaseURL":"https://angular-mobilcsomag-default-rtdb.europe-west1.firebasedatabase.app","storageBucket":"angular-mobilcsomag.appspot.com","apiKey":"AIzaSyA8o_A4zXaw2xpqvBW_sfEgbUffosq_FdU","authDomain":"angular-mobilcsomag.firebaseapp.com","messagingSenderId":"281224202241","measurementId":"G-42YZDBXY00"}),
-    //provideFirebaseApp(() => initializeApp({"projectId":"angular-mobilcsomag","appId":"1:281224202241:web:2778a109a80441e8b91800","databaseURL":"https://angular-mobilcsomag-default-rtdb.europe-west1.firebasedatabase.app","storageBucket":"angular-mobilcsomag.appspot.com","apiKey":"AIzaSyA8o_A4zXaw2xpqvBW_sfEgbUffosq_FdU","authDomain":"angular-mobilcsomag.firebaseapp.com","messagingSenderId":"281224202241","measurementId":"G-42YZDBXY00"})),
+    AngularFireModule.initializeApp(environment.firebase),
+    //provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())

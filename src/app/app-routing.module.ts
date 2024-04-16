@@ -7,7 +7,7 @@ const routes: Routes = [
     ,canActivate:[authGuard]
   }, 
     {path : 'packages', loadChildren: () => import('./pages/packages/packages.module').then(m => m.PackagesModule)}, 
-    {path : 'user-packages', loadChildren: () => import('./pages/packages/packages.module').then(m => m.PackagesModule),
+    {path : 'user-packages', loadChildren: () => import('./pages/user-packages/user-packages.module').then(m => m.UserPackagesModule),
       canActivate:[authGuard]
     }, 
     {path : 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)}, 
