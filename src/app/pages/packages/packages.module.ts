@@ -7,6 +7,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { NgFor } from '@angular/common';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [PackagesComponent],
@@ -15,6 +16,7 @@ import { NgFor } from '@angular/common';
     PackagesRoutingModule,
     FlexLayoutModule,
     MatCardModule,
+    MatGridListModule,
     MatButtonModule,
     NgFor
   ]

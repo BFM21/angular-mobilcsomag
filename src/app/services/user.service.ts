@@ -23,7 +23,7 @@ export class UserService {
 
   update(user: User){
     let userDoc = this.afs.doc<User>(this.collectionName + "/" + user.id);
-    userDoc.update({firstName: user.firstName, lastName: user.lastName, email: user.email, phoneNumber: user.phoneNumber});
+    userDoc.update({firstName: user.firstName, lastName: user.lastName, email: user.email, phoneNumber: user.phoneNumber, currentPackageId: user.currentPackageId});
   }
 
 

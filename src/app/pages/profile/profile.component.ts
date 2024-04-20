@@ -20,7 +20,7 @@ export class ProfileComponent {
     lastName: '',
     email: '',
     phoneNumber: '',
-    packages: []
+    currentPackageId: ''
   }
 
   profileForm = new FormGroup({

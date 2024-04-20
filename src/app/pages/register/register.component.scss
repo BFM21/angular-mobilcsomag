@@ -21,3 +21,25 @@ input{
 .inline-inputs > div:first-child{
     margin-right: 2%;
 }
+
+@media screen and (max-width: 960px) {
+    .inline-inputs{
+        display: block;
+    }
+
+    .inline-inputs > div > button{
+        margin-bottom: 20px;
+    }
+
+    .form-box{
+        margin: 0 auto;
+        width: 70%;
+    }
+}
+
+@media screen and (min-width: 2700px) {
+    .form-box{
+        margin: 0 auto;
+        width: 30%;
+    }
+}

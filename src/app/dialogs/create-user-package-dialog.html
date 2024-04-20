@@ -14,6 +14,6 @@
     </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="false">Mégse</button>
-    <button mat-button [mat-dialog-close]="{name: userPackageForm.get('name')?.value, description: userPackageForm.get('description')?.value}" cdkFocusInitial>Létrehoz</button>
+    <button mat-flat-button color="warn" style="margin-right: 10px;" [mat-dialog-close]="false">Mégse</button>
+    <button mat-flat-button color="primary" [mat-dialog-close]="{name: userPackageForm.get('name')?.value, description: userPackageForm.get('description')?.value}" cdkFocusInitial>Létrehoz</button>
 </mat-dialog-actions>

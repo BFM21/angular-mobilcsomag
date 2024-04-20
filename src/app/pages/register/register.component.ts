@@ -35,7 +35,7 @@ export class RegisterComponent {
           lastName: this.registerForm.get('lastName')?.value,
           email: this.registerForm.get('email')?.value,
           phoneNumber: this.registerForm.get('phoneNumber')?.value,
-          packages: []
+          currentPackageId: '',
         };
         this.userService.create(newUser).then(_=>{
 

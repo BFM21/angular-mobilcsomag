@@ -1,14 +1,27 @@
 <br>
-<div class="packages-container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="20px" >
+<div class="packages-container">
     <h1>Saját csomagok</h1>
-    
-    <div #packagesExist class="package-list-container" fxFlex fxLayout fxLayoutAlign="start" fxLayoutGap="10px" *ngIf="userPackages.length > 0">
-        <div class="package-card" *ngFor="let package of userPackages" >
+    <h2 *ngIf="userPackages.length <= 0">Nincsenek csomagjaid!</h2>
+    <mat-grid-list *ngIf="userPackages.length > 0" cols="{{columnCount}}" rowHeight="375px">
+        <mat-grid-tile *ngFor="let package of userPackages">
             <mat-card>
                 <mat-card-header>
-                    <mat-card-title>
-                        <h1>{{package.name}}</h1>
-                    </mat-card-title>
+                    <div class="header-container">
+                        <div>
+                            <mat-card-title>
+                                <h1>{{package.name}}</h1>
+                            </mat-card-title>
+                        </div>
+                        <div>
+                            <div (click)="showEditDialog(package.id)" class="material-symbols-outlined" id="editButton" style="margin-right: 20px;">
+                                edit
+                            </div>
+                            <div (click)="deletePackage(package.id)" class="material-symbols-outlined" id="deleteButton">
+                                delete
+                            </div>
+                        </div>
+                    </div>
+
                 </mat-card-header>
                 <mat-card-content>
                     <h3>
@@ -20,12 +33,14 @@
                     <div fxFlex fxLayout="row" fxLayoutAlign="start" fxLayoutGap="30px">
                         <h2>
                             {{package.price}} HUF/hó.
-                        </h2>
-                        <button mat-button>Csomag beállítása</button>
+                        </h2><br>
+                        <div fxFlex fxLayout="row" fxLayoutAlign="start" fxLayoutGap="30px">
+                            <button mat-flat-button color="primary" (click)="setCurrentPackage(package.id)">Legyen ez a díjcsomagom!</button>
+                        </div>
                     </div>
                 </mat-card-actions>
             </mat-card>
-        </div>
-    </div>
-    <h2 *ngIf="userPackages.length <= 0">Nincsenek csomagjaid!</h2>
+        </mat-grid-tile>
+    </mat-grid-list>
+    
 </div>

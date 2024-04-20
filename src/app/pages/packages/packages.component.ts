@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Package, PackageType } from '../../models/Package';
 import { AuthService } from '../../services/auth.service';
 import { PackagesService } from '../../services/packages.service';
@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CreateUserPackageDialog } from '../../dialogs/create-user-package-dialog';
 import { Router } from '@angular/router';
 import { User } from '@angular/fire/auth';
+import { UserService } from '../../services/user.service';
 
 
 
@@ -27,7 +28,23 @@ export class PackagesComponent {
   selectedInternetPackage?: Package | undefined;
   selectedCallMessagePackage?: Package | undefined;
 
-  constructor(private router: Router, private authService: AuthService, private packageService: PackagesService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
+  public innerWidth: any;
+  columnCount: number = 3;
+  
+  @HostListener('window:resize', ['$event.target.innerWidth'])
+
+  onResize(width: number) {
+    console.log(width);
+     if(960 < width && width < 1600){
+      this.columnCount = 2;
+    }
+    else if(width <= 960){
+      this.columnCount = 1;
+    }else{
+      this.columnCount = 3;
+    }
+ }
+  constructor(private router: Router, private authService: AuthService, private packageService: PackagesService, private userService: UserService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   showCreateDialog() {
     const dialogRef = this.dialog.open(CreateUserPackageDialog);
@@ -45,14 +62,14 @@ export class PackagesComponent {
       const userPackage: UserPackage = {
         id: '',
         userId: this.currentUser?.uid ?? '',
-        internetPackageId: this.selectedInternetPackage?.id ?? '',
-        callMessagePackageId: this.selectedCallMessagePackage?.id ?? '',
+        internetPackage: this.selectedInternetPackage?.id ?? '',
+        callMessagePackage: this.selectedCallMessagePackage?.id ?? '',
         name: packageName,
         description: packageDescription ?? '',
         price: parseInt(this.selectedInternetPackage?.price ?? '') + parseInt(this.selectedCallMessagePackage?.price ?? '') + "",
         type: PackageType.USER_MADE
       }
-      this.packageService.create(userPackage).then(() => {
+      this.packageService.create(userPackage, this.selectedInternetPackage?.id!, this.selectedCallMessagePackage?.id!).then(() => {
         this.snackBar.open('Csomag sikeresen létrehozva!', 'OK', {
           duration: 2000
         }).afterDismissed().subscribe(result => {
@@ -61,7 +78,7 @@ export class PackagesComponent {
 
       }, () => this.snackBar.open('Hiba történt!', 'OK'));
     } else {
-      this.snackBar.open('Nem vagy bejelentkezve!', 'Bejelentkezés',{
+      this.snackBar.open('Nem vagy bejelentkezve!', 'Bejelentkezés', {
         duration: 2000
       }).afterDismissed().subscribe(result => {
         this.router.navigateByUrl('/login');
@@ -87,9 +104,29 @@ export class PackagesComponent {
     console.log(this.selectedCallMessagePackage);
 
   }
-
+  
+  setCurrentPackage(packageId:string){
+    this.userService.read(this.currentUser!.uid).subscribe(user => {
+      let editUser = user[0];
+      editUser.currentPackageId = packageId;
+      this.userService.update(editUser);
+    });
+  }
 
   ngOnInit() {
+
+    this.innerWidth = window.innerWidth;
+    if(960 < innerWidth && innerWidth < 1600){
+      this.columnCount = 2;
+    }
+    else if(innerWidth <= 960){
+      this.columnCount = 1;
+    }else{
+      this.columnCount = 3;
+    }
+    this.standardPackages = []
+    this.internetPackages = []
+    this.callMessagePackages = []
     this.authService.isUserLoggedIn().subscribe(user => {
       this.currentUser = user;
     });

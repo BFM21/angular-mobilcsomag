@@ -1,9 +1,37 @@
 <br>
 <div class="packages-container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="20px">
     <h1>Standard csomagok</h1>
-    <div class="package-list-container" fxFlex fxLayout fxLayoutAlign="start" fxLayoutGap="10px">
-        <div class="package-card" *ngFor="let package of standardPackages">
-            <mat-card>
+    <mat-grid-list *ngIf="standardPackages.length > 0" cols="{{columnCount}}" rowHeight="375px">
+        <mat-grid-tile *ngFor="let package of standardPackages">
+            <mat-card class="package-card">
+                <mat-card-header>
+                    <mat-card-title>
+                        <h1>{{package.name}}</h1>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <h3>
+                        {{package.description}}
+                    </h3>
+                </mat-card-content>
+                <mat-card-actions>
+                    <div fxFlex fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <h2>
+                            {{package.price}} HUF/hó.
+                        </h2>
+                        <button mat-flat-button color="primary" (click)="setCurrentPackage(package.id)">Legyen ez a díjcsomagom!</button>
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <h1>Állítsd össze saját csomagod!</h1>
+    <h2>Internet csomagok</h2>
+    <mat-grid-list *ngIf="standardPackages.length > 0" cols="{{columnCount}}" rowHeight="400px">
+        <mat-grid-tile *ngFor="let package of internetPackages">
+            <mat-card class="package-card"
+                [ngClass]="{selected: selectedInternetPackage !== undefined && selectedInternetPackage.id === package.id, unselected: !(selectedInternetPackage !== undefined && selectedInternetPackage.id === package.id) }">
                 <mat-card-header>
                     <mat-card-title>
                         <h1>{{package.name}}</h1>
@@ -20,64 +48,42 @@
                         <h2>
                             {{package.price}} HUF/hó.
                         </h2>
-                        <button mat-button>Csomag beállítása</button>
+                        <button mat-flat-button color="primary"
+                            (click)="selectInternetPackage(package.id)">Választás</button>
                     </div>
                 </mat-card-actions>
             </mat-card>
-        </div>
-    </div>
-    <h1>Állítsd össze saját csomagod!</h1>
-    <h2>Internet csomagok</h2>
-    <div class="package-list-container" fxFlex fxLayout fxLayoutAlign="start" fxLayoutGap="10px">
-        <mat-card class="package-card" *ngFor="let package of internetPackages"
-            [ngClass]="{selected: selectedInternetPackage !== undefined && selectedInternetPackage.id === package.id, unselected: !(selectedInternetPackage !== undefined && selectedInternetPackage.id === package.id) }">
-            <mat-card-header>
-                <mat-card-title>
-                    <h1>{{package.name}}</h1>
-                </mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <h3>
-                    {{package.description}}
-                </h3>
-
-            </mat-card-content>
-            <mat-card-actions>
-                <div fxFlex fxLayout="row" fxLayoutAlign="start" fxLayoutGap="30px">
-                    <h2>
-                        {{package.price}} HUF/hó.
-                    </h2>
-                    <button mat-button (click)="selectInternetPackage(package.id)">Választás</button>
-                </div>
-            </mat-card-actions>
-        </mat-card>
-    </div>
+        </mat-grid-tile>
+    </mat-grid-list>
     <h2>Hang és üzenet csomagok</h2>
-    <div class="package-list-container" fxFlex fxLayout fxLayoutAlign="start" fxLayoutGap="10px">
-        <mat-card class="package-card" *ngFor="let package of callMessagePackages"
-            [ngClass]="{selected: selectedCallMessagePackage !== undefined && selectedCallMessagePackage.id === package.id, unselected: !(selectedCallMessagePackage !== undefined && selectedCallMessagePackage.id === package.id) }">
-            <mat-card-header>
-                <mat-card-title>
-                    <h1>{{package.name}}</h1>
-                </mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <h3>
-                    {{package.description}}
-                </h3>
+    <mat-grid-list *ngIf="standardPackages.length > 0" cols="{{columnCount}}" rowHeight="400px">
+        <mat-grid-tile *ngFor="let package of callMessagePackages">
+            <mat-card class="package-card"
+                [ngClass]="{selected: selectedCallMessagePackage !== undefined && selectedCallMessagePackage.id === package.id, unselected: !(selectedCallMessagePackage !== undefined && selectedCallMessagePackage.id === package.id) }">
+                <mat-card-header>
+                    <mat-card-title>
+                        <h1>{{package.name}}</h1>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <h3>
+                        {{package.description}}
+                    </h3>
 
-            </mat-card-content>
-            <mat-card-actions>
-                <div fxFlex fxLayout="row" fxLayoutAlign="start" fxLayoutGap="30px">
-                    <h2>
-                        {{package.price}} HUF/hó.
-                    </h2>
-                    <button mat-button (click)="selectCallMessagePackage(package.id)">Választás</button>
-                </div>
-            </mat-card-actions>
-        </mat-card>
-    </div>
-    <button class="btn btn-primary"
-        [ngClass]="{'disabled': selectedInternetPackage === undefined || selectedCallMessagePackage === undefined}"
+                </mat-card-content>
+                <mat-card-actions>
+                    <div fxFlex fxLayout="row" fxLayoutAlign="start" fxLayoutGap="30px">
+                        <h2>
+                            {{package.price}} HUF/hó.
+                        </h2>
+                        <button mat-flat-button color="primary"
+                            (click)="selectCallMessagePackage(package.id)">Választás</button>
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <button id="createPackageButton" mat-flat-button color="primary"[disabled]="selectedInternetPackage === undefined || selectedCallMessagePackage === undefined || currentUser === null"
+        
         (click)="showCreateDialog()">Saját csomag létrehozása</button><br><br>
 </div>

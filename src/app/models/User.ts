@@ -4,5 +4,5 @@ export interface User{
     lastName: string,
     email: string,
     phoneNumber: string,
-    packages: string[]
+    currentPackageId: string,
 }
