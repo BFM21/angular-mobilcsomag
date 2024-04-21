@@ -20,7 +20,6 @@ export class DashboardComponent {
 
   myLocalStorage?: Storage | null;
   currentUserId: string;
-  subscriptions: Subscription[] = [];
 
   currentUser: User = {
     id: '',
@@ -39,8 +38,7 @@ export class DashboardComponent {
   }
 
   ngOnInit() {
-    this.counter++;
-    this.subscriptions.push(this.userService.read(this.currentUserId).subscribe(user => {
+    this.userService.read(this.currentUserId).pipe(take(1)).subscribe(user => {
       this.currentUser = user[0];
       this.packageService.readUserPackage(this.currentUser.currentPackageId).pipe(take(1)).subscribe(mobilePackage => {
         if (mobilePackage.length > 0) {
@@ -61,15 +59,6 @@ export class DashboardComponent {
       });
 
 
-    })
-  );
-    console.log(this.counter);
-  }
-
-  ngOnDestroy(): void {
-    console.log('onDestroy')
-    for(let sub in this.subscriptions){
-      this.subscriptions[sub].unsubscribe();
-    }
+    });
   }
 }

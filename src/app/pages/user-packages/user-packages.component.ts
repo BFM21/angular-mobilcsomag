@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { CreateUserPackageDialog } from '../../dialogs/create-user-package-dialog';
 import { EditUserPackageDialog } from '../../dialogs/edit-user-package-dialog';
 import { UserService } from '../../services/user.service';
-import { Subject } from 'rxjs';
+import { Subject, take } from 'rxjs';
 import { User } from '../../models/User';
 
 @Component({
@@ -74,15 +74,11 @@ export class UserPackagesComponent {
   setCurrentPackage(packageId:string){
     //console.log(packageId);
     let editUser: any;
-    let subject = new Subject<User>();
-    this.userService.read(this.currentUser!.uid).subscribe(user => {
+    this.userService.read(this.currentUser!.uid).pipe(take(1)).subscribe(user => {
       editUser = user[0];
       editUser.currentPackageId = packageId;
-      subject.next(editUser);
+      this.userService.update(editUser);
       
-    });
-    subject.asObservable().subscribe(user=>{
-      this.userService.update(user);
     });
     
   }
