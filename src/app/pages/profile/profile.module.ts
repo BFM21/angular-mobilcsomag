@@ -5,6 +5,8 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -16,6 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
     ProfileRoutingModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatDialogModule,
+    MatSnackBarModule
   ]
 })
 export class ProfileModule { }

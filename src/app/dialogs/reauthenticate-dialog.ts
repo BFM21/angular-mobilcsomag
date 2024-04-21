@@ -7,34 +7,20 @@ import { UserPackage } from '../models/UserPackage';
 import { PackageType } from '../models/Package';
 
 @Component({
-  selector: 'edit-user-package-dialog',
-  templateUrl: 'edit-user-package-dialog.html',
+  selector: 'reauthenticate-dialog',
+  templateUrl: 'reauthenticate-dialog.html',
   standalone: true,
   imports: [MatDialogModule, MatButtonModule,ReactiveFormsModule],
 })
-export class EditUserPackageDialog {
-
-    selectedPackage: UserPackage = {
-      userId: '',
-      internetPackageId: '',
-      callMessagePackageId: '',
-      id: '',
-      name: '',
-      description: '',
-      price: '',
-      type: PackageType.USER_MADE,
-    };
+export class ReauthenticateDialog {
 
     constructor( @Inject(MAT_DIALOG_DATA) public data: any,private packagesService: PackagesService){}
 
-    userPackageForm = new FormGroup({
-        name: new FormControl(),
-        description: new FormControl(),
+    passwordForm = new FormGroup({
+        password: new FormControl(),
       });
 
       ngOnInit() {
-        this.packagesService.readUserPackage(this.data.id).subscribe(userPackage =>{
-          this.selectedPackage = userPackage[0];
-        });
+       
       }
 }

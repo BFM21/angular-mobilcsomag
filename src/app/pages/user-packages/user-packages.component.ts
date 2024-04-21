@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { CreateUserPackageDialog } from '../../dialogs/create-user-package-dialog';
 import { EditUserPackageDialog } from '../../dialogs/edit-user-package-dialog';
 import { UserService } from '../../services/user.service';
+import { Subject } from 'rxjs';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-user-packages',
@@ -23,7 +25,6 @@ export class UserPackagesComponent {
   @HostListener('window:resize', ['$event.target.innerWidth'])
 
   onResize(width: number) {
-    console.log(width);
     if(1600 < width && width < 2400){
       this.columnCount = 3;
     }
@@ -43,7 +44,6 @@ export class UserPackagesComponent {
     const dialogRef = this.dialog.open(EditUserPackageDialog,{data: {id: packageId}});
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result !== undefined && result != false) {
         this.editPackage(packageId, result.name, result.description);
       }
@@ -72,19 +72,29 @@ export class UserPackagesComponent {
 
 
   setCurrentPackage(packageId:string){
+    //console.log(packageId);
+    let editUser: any;
+    let subject = new Subject<User>();
     this.userService.read(this.currentUser!.uid).subscribe(user => {
-      let editUser = user[0];
+      editUser = user[0];
       editUser.currentPackageId = packageId;
-      this.userService.update(editUser);
+      subject.next(editUser);
+      
     });
+    subject.asObservable().subscribe(user=>{
+      this.userService.update(user);
+    });
+    
   }
 
   ngOnInit(){
     this.innerWidth = window.innerWidth;
-    if(1600 < innerWidth && innerWidth < 2400){
+    console.log(this.innerWidth);
+
+    if(1700 < innerWidth && innerWidth < 2400){
       this.columnCount = 3;
     }
-    else if(960 < innerWidth && innerWidth < 1600){
+    else if(960 < innerWidth && innerWidth < 1700){
       this.columnCount = 2;
     }
     else if(innerWidth <= 960){
@@ -95,7 +105,6 @@ export class UserPackagesComponent {
     this.authService.isUserLoggedIn().subscribe(user => {
       this.currentUser = user;
       this.packageService.readAllUserMade(this.currentUser?.uid!).subscribe(mobilePackages => {
-        console.log(mobilePackages);
         this.userPackages = [];
         for(let mobilePackage in mobilePackages){
             this.userPackages.push(mobilePackages[mobilePackage]);

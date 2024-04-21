@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { user } from '@angular/fire/auth';
-import { AngularFireAuth } from '@angular/fire/compat/auth'; 
+import { signInWithEmailAndPassword, user } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Subject } from 'rxjs';
 
 
 @Injectable({
@@ -10,30 +11,31 @@ export class AuthService {
 
   constructor(private auth: AngularFireAuth) { }
 
-  login(email: string, password: string){
+  login(email: string, password: string) {
     return this.auth.signInWithEmailAndPassword(email, password);
   }
 
-  logout(){
+  logout() {
     return this.auth.signOut();
   }
 
-  isUserLoggedIn(){
+  isUserLoggedIn() {
     return this.auth.user;
   }
 
-  register(email: string, password: string){
+  register(email: string, password: string) {
     return this.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  deleteUser(){
-    this.auth.user.subscribe(user=>user?.delete());
+  deleteUser() {
+    this.auth.user.subscribe(user => user?.delete());
   }
 
-  updateUserCredentials(email: string, password:string){
-    this.auth.user.subscribe(user=>{
-      user?.updateEmail(email);
-      user?.updatePassword(password);
+  updateUserPassword(password: string) {
+    this.auth.user.subscribe(user => {
+     
+      user?.updatePassword(password)
+
     });
   }
 }

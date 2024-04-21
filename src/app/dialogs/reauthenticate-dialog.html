@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Bejelentkezés</h2>
+<mat-dialog-content class="mat-typography">
+    <h3>Hogy lecseréld jelszavad, újra be kell jelentkezz! Kérlek írd be a régi jelszavad!</h3>
+    <form [formGroup]="passwordForm">
+        <div class="form-group">
+            <div class="form-group">
+                <label for="password">Jelszó</label>
+                <input type="password" class="form-control" id="password" formControlName="password"  required>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-flat-button color="primary" [mat-dialog-close]="{password: passwordForm.get('password')?.value}" cdkFocusInitial>Bejelentkezés</button>
+</mat-dialog-actions>

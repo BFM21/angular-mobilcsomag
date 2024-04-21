@@ -20,16 +20,20 @@ export class UserService {
     return this.afs.collection<User>('users', ref => ref.where('id', '==', id).limit(1)).valueChanges();
   }
 
+  readUserByEmail(email:string){
+    return this.afs.collection<User>('users', ref => ref.where('email', '==', email).limit(1)).valueChanges();
+  }
+
 
   update(user: User){
     let userDoc = this.afs.doc<User>(this.collectionName + "/" + user.id);
-    userDoc.update({firstName: user.firstName, lastName: user.lastName, email: user.email, phoneNumber: user.phoneNumber, currentPackageId: user.currentPackageId});
+    return userDoc.update({firstName: user.firstName, lastName: user.lastName, email: user.email, phoneNumber: user.phoneNumber, currentPackageId: user.currentPackageId});
   }
 
 
   delete(id:string){
     let userDoc = this.afs.doc(this.collectionName + "/" + id);
-    userDoc.delete();
+    return userDoc.delete();
   }
 
 }

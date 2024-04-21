@@ -5,6 +5,7 @@ import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from './register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
     RegisterRoutingModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatSnackBarModule,
   ]
 })
 export class RegisterModule { }

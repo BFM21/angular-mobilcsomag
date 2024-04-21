@@ -7,8 +7,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CreateUserPackageDialog } from '../../dialogs/create-user-package-dialog';
 import { Router } from '@angular/router';
-import { User } from '@angular/fire/auth';
 import { UserService } from '../../services/user.service';
+import { Subject } from 'rxjs';
+import {User} from '../../models/User' 
 
 
 
@@ -34,7 +35,6 @@ export class PackagesComponent {
   @HostListener('window:resize', ['$event.target.innerWidth'])
 
   onResize(width: number) {
-    console.log(width);
      if(960 < width && width < 1600){
       this.columnCount = 2;
     }
@@ -50,7 +50,6 @@ export class PackagesComponent {
     const dialogRef = this.dialog.open(CreateUserPackageDialog);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result != false) {
         this.createNewUserPackage(result.name, result.description);
       }
@@ -62,8 +61,8 @@ export class PackagesComponent {
       const userPackage: UserPackage = {
         id: '',
         userId: this.currentUser?.uid ?? '',
-        internetPackage: this.selectedInternetPackage?.id ?? '',
-        callMessagePackage: this.selectedCallMessagePackage?.id ?? '',
+        internetPackageId: this.selectedInternetPackage?.id ?? '',
+        callMessagePackageId: this.selectedCallMessagePackage?.id ?? '',
         name: packageName,
         description: packageDescription ?? '',
         price: parseInt(this.selectedInternetPackage?.price ?? '') + parseInt(this.selectedCallMessagePackage?.price ?? '') + "",
@@ -92,7 +91,6 @@ export class PackagesComponent {
         this.selectedInternetPackage = this.internetPackages[i];
       }
     }
-    console.log(this.selectedInternetPackage);
   }
 
   selectCallMessagePackage(packageId: string) {
@@ -101,22 +99,28 @@ export class PackagesComponent {
         this.selectedCallMessagePackage = this.callMessagePackages[i];
       }
     }
-    console.log(this.selectedCallMessagePackage);
 
   }
   
   setCurrentPackage(packageId:string){
+    //console.log(packageId);
+    let editUser: any;
+    let subject = new Subject<User>();
     this.userService.read(this.currentUser!.uid).subscribe(user => {
-      let editUser = user[0];
+      editUser = user[0];
       editUser.currentPackageId = packageId;
-      this.userService.update(editUser);
+      subject.next(editUser);
+    });
+
+    subject.asObservable().subscribe(user=>{
+      this.userService.update(user);
     });
   }
 
   ngOnInit() {
-
+    console.log('onInit');
     this.innerWidth = window.innerWidth;
-    if(960 < innerWidth && innerWidth < 1600){
+    if(960 < innerWidth && innerWidth < 1500){
       this.columnCount = 2;
     }
     else if(innerWidth <= 960){
@@ -124,13 +128,14 @@ export class PackagesComponent {
     }else{
       this.columnCount = 3;
     }
-    this.standardPackages = []
-    this.internetPackages = []
-    this.callMessagePackages = []
+
+    this.standardPackages = [];
+    this.internetPackages = [];
+    this.callMessagePackages = [];
+
     this.authService.isUserLoggedIn().subscribe(user => {
       this.currentUser = user;
     });
-
     this.packageService.readAllStandard().subscribe(mobilePackages => {
       for (let mobilePackage in mobilePackages) {
         this.standardPackages.push(mobilePackages[mobilePackage]);
@@ -148,6 +153,8 @@ export class PackagesComponent {
         this.callMessagePackages.push(mobilePackages[mobilePackage]);
       }
     });
+
+ 
   }
 
 }

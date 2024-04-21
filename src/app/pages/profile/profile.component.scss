@@ -35,6 +35,15 @@ input{
     margin-right: 2%;
 }
 
+
+.ng-submitted  input.ng-invalid {
+    border: solid 2px red;
+ }
+
+ .field-message{
+    color: red;
+ }
+
 @media screen and (max-width: 960px) {
     .inline-inputs{
         display: block;

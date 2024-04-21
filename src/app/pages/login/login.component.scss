@@ -8,6 +8,15 @@ input{
     margin-bottom: 5%;
 }
 
+
+.ng-submitted input.ng-invalid {
+    border: solid 2px red;
+ }
+
+ .field-message{
+    color: red;
+ }
+
 @media screen and (max-width: 960px) {
     .form-box{
         margin: 0 auto;
