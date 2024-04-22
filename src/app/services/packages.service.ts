@@ -41,11 +41,11 @@ export class PackagesService {
   }
 
   readInternetPackage(id: string) {
-    return this.afs.collection<UserPackage>(this.userMadePackageCollection, ref => ref.where('id', '==', id).limit(1)).valueChanges();
+    return this.afs.collection<UserPackage>(this.internetPackagesCollection, ref => ref.where('id', '==', id).limit(1)).valueChanges();
   }
 
   readCallMessagePackage(id: string) {
-    return this.afs.collection<UserPackage>(this.userMadePackageCollection, ref => ref.where('id', '==', id).limit(1)).valueChanges();
+    return this.afs.collection<UserPackage>(this.callMessagePackageCollection, ref => ref.where('id', '==', id).limit(1)).valueChanges();
   }
 
   readUserPackage(id: string) {

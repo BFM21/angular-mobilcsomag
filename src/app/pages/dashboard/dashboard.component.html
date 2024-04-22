@@ -8,6 +8,12 @@
         
         <p>{{currentPackage.name}}</p>
         <p>{{currentPackage.description}}</p>
+        <p *ngIf="isCurrentPackageUserMade()">{{callMessagePackage?.name}}</p>
+        <p *ngIf="isCurrentPackageUserMade()">{{callMessagePackage?.description}}</p>
+        <p *ngIf="isCurrentPackageUserMade()">{{callMessagePackage?.price}}</p>
+        <p *ngIf="isCurrentPackageUserMade()">{{internetPackage?.name}}</p>
+        <p *ngIf="isCurrentPackageUserMade()">{{internetPackage?.description}}</p>
+        <p *ngIf="isCurrentPackageUserMade()">{{internetPackage?.price}}</p>
         <p>{{currentPackage.price}}</p>
     </div>
 </div>
