@@ -69,18 +69,18 @@ export class DashboardComponent {
           this.packageService.readCallMessagePackage(this.currentPackage.callMessagePackageId).pipe(take(1)).subscribe(subPackage => {
             if (subPackage.length > 0) {
               this.callMessagePackage = subPackage[0];
-              console.log(this.callMessagePackage);
+              // console.log(this.callMessagePackage);
             }
         });
   
             this.packageService.readInternetPackage(this.currentPackage.internetPackageId).pipe(take(1)).subscribe(subPackage => {
               if (subPackage.length > 0) {
                 this.internetPackage = subPackage[0];
-                console.log(this.internetPackage);
+                // console.log(this.internetPackage);
               }
         });
-        console.log(window.location);
-        console.log(this.currentPackage);
+        // console.log(window.location);
+        // console.log(this.currentPackage);
       }
 
       });
@@ -90,8 +90,8 @@ export class DashboardComponent {
           this.currentPackage = mobilePackage[0];
           this.currentPackage.type = PackageType.STANDARD;
 
-          console.log(window.location);
-          console.log(this.currentPackage);
+          // console.log(window.location);
+          // console.log(this.currentPackage);
         }
 
       });

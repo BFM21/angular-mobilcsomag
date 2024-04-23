@@ -25,7 +25,7 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.get('email')?.value!, this.loginForm.get('password')?.value!).then(cred => {
         //console.log(cred);
-       
+        this.router.navigateByUrl('/dashboard');
       }, (error) => {
         //console.log((error as FirebaseError).code);
         switch ((error as FirebaseError).code) {
@@ -61,7 +61,6 @@ export class LoginComponent {
             })
         }
       });
-      this.router.navigateByUrl('/dashboard');
     }
   }
 

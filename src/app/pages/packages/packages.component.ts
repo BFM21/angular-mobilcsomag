@@ -120,7 +120,7 @@ export class PackagesComponent {
   }
 
   ngOnInit() {
-    console.log('onInit');
+    // console.log('onInit');
     this.innerWidth = window.innerWidth;
     if(960 < innerWidth && innerWidth < 1500){
       this.columnCount = 2;

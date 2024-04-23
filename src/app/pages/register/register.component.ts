@@ -44,7 +44,7 @@ export class RegisterComponent {
           currentPackageId: '',
         };
         this.userService.create(newUser).then(_ => {
-
+          this.router.navigateByUrl('/dashboard');
         }).catch(error => {
           console.error(error);
         });
@@ -61,11 +61,8 @@ export class RegisterComponent {
           });
         }
       });
-      this.router.navigateByUrl('/dashboard');
-    } else {
-    
+      
     }
-
   }
 
 

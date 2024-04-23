@@ -89,7 +89,7 @@ export class UserPackagesComponent {
 
   ngOnInit(){
     this.innerWidth = window.innerWidth;
-    console.log(this.innerWidth);
+    // console.log(this.innerWidth);
 
     if(1700 < innerWidth && innerWidth < 2400){
       this.columnCount = 3;
