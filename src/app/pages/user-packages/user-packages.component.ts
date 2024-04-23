@@ -25,13 +25,13 @@ export class UserPackagesComponent {
   @HostListener('window:resize', ['$event.target.innerWidth'])
 
   onResize(width: number) {
-    if(1600 < width && width < 2400){
+    if(1700 < width && width < 2400){
       this.columnCount = 3;
     }
-    else if(960 < width && width < 1600){
+    else if(1180 < width && width < 1700){
       this.columnCount = 2;
     }
-    else if(width <= 960){
+    else if(width <= 1180){
       this.columnCount = 1;
     }else{
       this.columnCount = 4;
@@ -77,7 +77,11 @@ export class UserPackagesComponent {
     this.userService.read(this.currentUser!.uid).pipe(take(1)).subscribe(user => {
       editUser = user[0];
       editUser.currentPackageId = packageId;
-      this.userService.update(editUser);
+      this.userService.update(editUser).then( result => {
+        this.snackBar.open('Jelenleg használt csomag sikeresen frissítve!', 'OK', {duration: 4500})
+      }, error => {
+        this.snackBar.open('Hiba történt a jelenlegi csomag frissítésekor!', 'OK', {duration: 4500})
+      });
       
     });
     
@@ -90,10 +94,10 @@ export class UserPackagesComponent {
     if(1700 < innerWidth && innerWidth < 2400){
       this.columnCount = 3;
     }
-    else if(960 < innerWidth && innerWidth < 1700){
+    else if(1180 < innerWidth && innerWidth < 1700){
       this.columnCount = 2;
     }
-    else if(innerWidth <= 960){
+    else if(innerWidth <= 1180){
       this.columnCount = 1;
     }else{
       this.columnCount = 4;

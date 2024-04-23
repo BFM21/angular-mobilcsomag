@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { Subject, take } from 'rxjs';
 import {User} from '../../models/User' 
+import { error } from 'console';
 
 
 
@@ -108,7 +109,11 @@ export class PackagesComponent {
     this.userService.read(this.currentUser!.uid).pipe(take(1)).subscribe(user => {
       editUser = user[0];
       editUser.currentPackageId = packageId;
-      this.userService.update(editUser);
+      this.userService.update(editUser).then( result => {
+        this.snackBar.open('Jelenleg használt csomag sikeresen frissítve!', 'OK', {duration: 4500})
+      }, error => {
+        this.snackBar.open('Hiba történt a jelenlegi csomag frissítésekor!', 'OK', {duration: 4500})
+      });
     });
 
     

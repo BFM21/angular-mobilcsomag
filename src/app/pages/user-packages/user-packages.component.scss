@@ -1,30 +1,39 @@
-.package-card {
-    width: 400px;
-    margin: 20px;
-  }
-  
-.packages-container{    
+
+
+.packages-container {
     margin: 0 auto;
     width: 75%;
 }
 
-mat-card-content{
+
+
+mat-card-content {
     height: 200px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
 }
 
-.selected{
+mat-card-content > h3 {
+    text-align: justify;
+    word-wrap: break-word;
+    white-space: normal;
+    max-width: 400px;
+}
+
+.selected {
     border: 3px solid #0b5ed7;
 }
 
-.unselected{
+.unselected {
     border: none;
 }
 
-.btn{
+.btn {
     max-height: 60px;
 }
 
-.header-container{
+.header-container {
     width: 100%;
     flex-wrap: nowrap;
     display: flex;
@@ -32,12 +41,12 @@ mat-card-content{
     align-content: space-between;
 }
 
-.header-container > div:first-child{
+.header-container > div:first-child {
     width: 100%;
     height: 100%;
 }
 
-.header-container > div{
+.header-container > div {
     width: 20%;
     height: 100%;
     flex-wrap: nowrap;
@@ -46,12 +55,23 @@ mat-card-content{
     align-content: space-between;
 }
 
-#editButton:hover{
+#editButton:hover {
     cursor: pointer;
     color: #0b5ed7;
 }
 
-#deleteButton:hover{
+#deleteButton:hover {
     cursor: pointer;
     color: red;
+}
+
+
+@media screen and (max-width:400px) {
+    mat-card-title > h1{
+        display: inline-block;
+        width: 100px;
+        white-space: nowrap;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+    }
 }

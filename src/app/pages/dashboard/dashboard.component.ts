@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, HostListener, Inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { PackagesService } from '../../services/packages.service';
 import { UserPackage } from '../../models/UserPackage';
@@ -20,7 +20,7 @@ export class DashboardComponent {
 
   myLocalStorage?: Storage | null;
   currentUserId: string;
-
+  public innerWidth: any;
   currentUser: User = {
     id: '',
     firstName: '',
@@ -34,12 +34,32 @@ export class DashboardComponent {
   internetPackage: Package | undefined;
   counter: number = 0;
 
+  columnCount: number = 2;
+  
+  @HostListener('window:resize', ['$event.target.innerWidth'])
+
+  onResize(width: number) {
+     
+   if(width <= 800){
+      this.columnCount = 1;
+    }else{
+      this.columnCount = 2;
+    }
+ }
+
   constructor(private authService: AuthService, private packageService: PackagesService, private userService: UserService, private afs: AngularFirestore, @Inject(DOCUMENT) private document: Document,) {
     this.myLocalStorage = document.defaultView?.localStorage;
     this.currentUserId = JSON.parse(localStorage.getItem('user') as string).uid;
   }
 
   ngOnInit() {
+    this.innerWidth = window.innerWidth;
+    if(this.innerWidth <= 800){
+      this.columnCount = 1;
+    }else{
+      this.columnCount = 2;
+    }
+
     this.userService.read(this.currentUserId).pipe(take(1)).subscribe(user => {
       this.currentUser = user[0];
       this.packageService.readUserPackage(this.currentUser.currentPackageId).pipe(take(1)).subscribe(mobilePackage => {

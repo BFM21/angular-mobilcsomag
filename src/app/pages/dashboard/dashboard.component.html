@@ -1,19 +1,74 @@
-<div>
+<div class="dashboard-container">
     <h1>Szia {{currentUser.firstName}}!</h1>
     <h2>Üdvözölünk a dashboardon!</h2>
 
+    <ng-container *ngIf="currentPackage; then packageExists; else noPackage"></ng-container>
+    <ng-template #packageExists>
+        <mat-grid-list cols="{{columnCount}}"  rowHeight="400px" [gutterSize]="'20px'">
+            <mat-grid-tile>
+                <div layout="column" class="tile-content-holder">
+                    <h2>Jelenlegi csomagod:</h2>
+                    <div class="flex-layout">
+                        <h3>Csomag neve:</h3>
+                        <p>{{currentPackage.name}}</p>
+                    </div>
+                    <div class="flex-layout">
+                        <h3>Csomag leírása:</h3>
+                        <p>{{currentPackage.description}}</p>
+                    </div>
+                    <div class="flex-layout">
+                        <h3>Csomag ára:</h3>
+                        <p>{{currentPackage.price}} Ft/hó.</p>
+                    </div>
+                    <div class="flex-layout">
+                        <h3 *ngIf="!isCurrentPackageUserMade()">Csomag típusa</h3>
+                        <p *ngIf="!isCurrentPackageUserMade()">Standard csomag</p>
+                    </div>
+                    <div class="flex-layout">
+                        <h3 *ngIf="isCurrentPackageUserMade()">Csomag típusa:</h3>
+                        <p *ngIf="isCurrentPackageUserMade()">Saját csomag</p>
+                    </div>
 
-    <div *ngIf="currentPackage" >
-        <h1>Jelenlegi csomagod:</h1>
-        
-        <p>{{currentPackage.name}}</p>
-        <p>{{currentPackage.description}}</p>
-        <p *ngIf="isCurrentPackageUserMade()">{{callMessagePackage?.name}}</p>
-        <p *ngIf="isCurrentPackageUserMade()">{{callMessagePackage?.description}}</p>
-        <p *ngIf="isCurrentPackageUserMade()">{{callMessagePackage?.price}}</p>
-        <p *ngIf="isCurrentPackageUserMade()">{{internetPackage?.name}}</p>
-        <p *ngIf="isCurrentPackageUserMade()">{{internetPackage?.description}}</p>
-        <p *ngIf="isCurrentPackageUserMade()">{{internetPackage?.price}}</p>
-        <p>{{currentPackage.price}}</p>
-    </div>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile *ngIf="isCurrentPackageUserMade()">
+                <div layout="column" class="tile-content-holder">
+                    
+                    <h2>Kiválasztott hívás és üzenet csomag:</h2>
+                    <div class="flex-layout">
+                        <h3>Csomag neve:</h3>
+                    <p *ngIf="isCurrentPackageUserMade()">{{callMessagePackage?.name}}</p>
+                    </div>
+                    <div class="flex-layout">
+                        <h3>Csomag leírása:</h3>
+                    <p *ngIf="isCurrentPackageUserMade()">{{callMessagePackage?.description}}</p>
+                    </div>
+                    <div class="flex-layout">
+                        <h3>Csomag ára:</h3>
+                    <p *ngIf="isCurrentPackageUserMade()">{{callMessagePackage?.price}} Ft/hó.</p>
+                    </div>
+                    <h2>Kiválasztott internet csomag:</h2>
+                    <div class="flex-layout">
+                        <h3>Csomag neve:</h3>
+                    <p *ngIf="isCurrentPackageUserMade()">{{internetPackage?.name}}</p>
+                    </div>
+                    <div class="flex-layout">
+                        <h3>Csomag leírása:</h3>
+                    <p *ngIf="isCurrentPackageUserMade()">{{internetPackage?.description}}</p>
+                    </div>
+                    <div class="flex-layout">
+                        <h3>Csomag ára:</h3>
+                    <p *ngIf="isCurrentPackageUserMade()">{{internetPackage?.price}} Ft/hó.</p>
+                    </div>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </ng-template>
+    <ng-template #noPackage>
+        <h3>Nincs csomag hozzácsatolva a fiókodhoz!</h3>
+    </ng-template>
+
+
+
+
 </div>
