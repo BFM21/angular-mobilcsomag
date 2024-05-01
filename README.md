@@ -1,27 +1,54 @@
 # AngularMobilcsomag
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.
+## Hosting 
 
-## Development server
+[https://angular-mobilcsomag.web.app/](https://angular-mobilcsomag.web.app/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Javítási segédlet:
 
-## Code scaffolding
+@Input és @Outputok: nincs
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Attríbutum direktívák: egy van a `src/app/directives` mappában
 
-## Build
+Strukturális direktívák:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- NgIf 
+- NgFor  
 
-## Running unit tests
+A `src/app/pages/packages/packages.component.html`-ben mindkettő megtalálható
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Használt Material elemek:
 
-## Running end-to-end tests
+`Ctrl+Shift+F` és az elemhez tartozó html taggel könnyen kereshető. Ezeket ide kiírtam, hogy gyorsabban menjen.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. SideNav - `mat-sidenav`
+2. Button - `mat-flat-button`
+3. Icon - `mat-icon`
+4. Grid List - `mat-grid-list`
+5. Card - `mat-card`
+6. Dialog - `mat-dialog`
+7. SnackBar - ennek nincs HTML tagje, mert egy service elem
+8. FormField - `mat-form-field`
+9. Input - ennek nincs HTML tagje, mert egy direktíva elem, de kereshető a `matInput` alapján
+10. Toolbar - `mat-toolbar`
 
-## Further help
+Fromok:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Formok találhatóak a regisztárció, bejelentkezés, profil oldalon valamint a felugró dialog ablakokban.
+
+`src/app/pages/login`
+`src/app/pages/register`
+`src/app/pages/profile`
+`src/app/dialogs`
+
+
+Komplex Firestore lekérdezések:
+
+Itt több ilyen lekérdezés is van: 
+`\src\app\services\packages.service.ts`
+
+Lifecycle Hook-ok:
+
+`\src\app\app.component.ts`-ben van ngOnInit() és ngOnDestroy(), ezenkívü lmindenhol csak ngOnInit() van.
+
+AuthGuard-dal védve van a Dashboard, Profil, és Saját csomagok oldal.

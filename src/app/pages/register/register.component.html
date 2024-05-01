@@ -5,73 +5,116 @@
 
       <div class="inline-inputs">
         <div>
-          <label for="firstNameInput">Keresztnév</label><br>
-          <input type="text" class="form-control" id="firstNameInput" aria-describedby="firstNameHelp"
-            formControlName="firstName" required>
-            <p class='field-message' *ngIf="showRequiredError('firstName') && submitted">
+          <mat-form-field>
+            <mat-label for="firstNameInput">Keresztnév</mat-label>
+            <input matInput type="text" class="form-control" id="firstNameInput" aria-describedby="firstNameHelp"
+              formControlName="firstName" required>
+            @if(showRequiredError('firstName') && registerForm.get('firstName')!.invalid) {
+            <mat-error>
               Ez a mező kötelező!
-            </p>
+            </mat-error>
+            }
+          </mat-form-field>
         </div>
         <div>
-          <label for="lastNameInput">Családnév</label><br>
-          <input type="text" class="form-control" id="lastNameInput" aria-describedby="lastNameHelp"
-            formControlName="lastName" required>
-            <p class='field-message' *ngIf="showRequiredError('lastName') && submitted">
+          <mat-form-field>
+            <mat-label for="lastNameInput">Családnév</mat-label>
+            <input matInput type="text" class="form-control" id="lastNameInput" aria-describedby="lastNameHelp"
+              formControlName="lastName" required>
+            @if(showRequiredError('lastName') && registerForm.get('lastName')!.invalid) {
+            <mat-error>
               Ez a mező kötelező!
-            </p>
+            </mat-error>
+            }
+          </mat-form-field>
         </div>
       </div>
 
     </div>
 
     <div class="form-group">
-      <label for="emailInput">Email cím</label>
-      <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp"
-        formControlName="email" [email]="true" required>
-      <p class='field-message' *ngIf="showRequiredError('email') && submitted">
-        Ez a mező kötelező!
-      </p>
-      <p class='field-message' *ngIf="showEmailFormatError() && submitted">
-        Nem megfelelő email formátum!
-      </p>
-    </div>
-    <div class="form-group">
-      <label for="phoneInput">Telefonszám</label>
-      <input type="tel" class="form-control" id="phoneInput"
-        aria-describedby="phoneHelp" formControlName="phoneNumber" required>
-        <p class='field-message' *ngIf="showRequiredError('phoneNumber') && submitted">
+      <mat-form-field>
+        <mat-label for="emailInput">Email cím</mat-label>
+        <input matInput type="email" class="form-control" id="emailInput" aria-describedby="emailHelp"
+          formControlName="email" [email]="true" required>
+        @if(showRequiredError('email') && registerForm.get('email')!.invalid) {
+        <mat-error>
           Ez a mező kötelező!
-        </p>
-        <p class='field-message' *ngIf="showPhoneFormatError() && submitted">
-          A telefonszámot a követekező formátumban kell megadni: +36-##-###-####
-        </p>
-    </div>
-    <div class="form-group">
-      <label for="passwordInput">Jelszó</label>
-      <input type="password" class="form-control" id="passwordInput" formControlName="password" required>
-      <p class='field-message' *ngIf="showRequiredError('password') && submitted">
-        Ez a mező kötelező!
-      </p>
-      <p class='field-message' *ngIf="showPasswordsDontMatchError() && submitted">
-        A megadott jelszavak nem egyeznek meg!
-      </p>
-      <p class='field-message' *ngIf="showPasswordShortError('password') && submitted">
-        A jelszó legalább 6 karakter hosszú kell legyen!
-      </p>
-    </div>
-    <div class="form-group">
-      <label for="passwordCheckInput">Jelszó újból</label>
-      <input type="password" class="form-control" id="passwordCheckInput" formControlName="passwordAgain" required>
+        </mat-error>
+        }
+        @if(showEmailFormatError() && registerForm.get('email')!.invalid) {
+        <mat-error>
+          Nem megfelelő email formátum!
+        </mat-error>
+        }
 
-      <p class='field-message' *ngIf="showRequiredError('passwordAgain') && submitted">
-        Ez a mező kötelező!
-      </p>
-      <p class='field-message' *ngIf="showPasswordsDontMatchError() && submitted">
-        A megadott jelszavak nem egyeznek meg!
-      </p>
-      <p class='field-message' *ngIf="showPasswordShortError('passwordAgain') && submitted">
-        A jelszó legalább 6 karakter hosszú kell legyen!
-      </p>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label for="phoneInput">Telefonszám</mat-label>
+        <input matInput type="tel" class="form-control" id="phoneInput" aria-describedby="phoneHelp"
+          formControlName="phoneNumber" required>
+        @if(showRequiredError('phoneNumber') && registerForm.get('phoneNumber')!.invalid) {
+        <mat-error>
+          Ez a mező kötelező!
+        </mat-error>
+        }
+        @if(showPhoneFormatError() && registerForm.get('phoneNumber')!.invalid) {
+        <mat-error>
+          A telefonszámot a követekező formátumban kell megadni: +36-##-###-####
+        </mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label for="passwordInput">Jelszó</mat-label>
+        <input matInput type="password" class="form-control" id="passwordInput" formControlName="password" required>
+        @if(showRequiredError('password') && registerForm.get('password')!.invalid) {
+        <mat-error>
+          Ez a mező kötelező!
+        </mat-error>
+        }
+        @if(showPasswordsDontMatchError() && registerForm.get('password')!.invalid) {
+        <mat-error>
+          A megadott jelszavak nem egyeznek meg!
+
+        </mat-error>
+        }
+        @if(showPasswordShortError('password') && registerForm.get('password')!.invalid) {
+        <mat-error>
+          A jelszó legalább 6 karakter hosszú kell legyen!
+
+        </mat-error>
+        }
+
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label for="passwordCheckInput">Jelszó újból</mat-label>
+        <input matInput type="password" class="form-control" id="passwordCheckInput" formControlName="passwordAgain"
+          required>
+
+        @if(showRequiredError('passwordAgain') && registerForm.get('passwordAgain')!.invalid) {
+        <mat-error>
+          Ez a mező kötelező!
+        </mat-error>
+        }
+        @if(showPasswordsDontMatchError() && registerForm.get('passwordAgain')!.invalid) {
+        <mat-error>
+          A megadott jelszavak nem egyeznek meg!
+
+        </mat-error>
+        }
+        @if(showPasswordShortError('passwordAgain') && registerForm.get('passwordAgain')!.invalid) {
+        <mat-error>
+          A jelszó legalább 6 karakter hosszú kell legyen!
+
+        </mat-error>
+        }
+      </mat-form-field>
     </div>
 
     <button type="submit" mat-flat-button color="primary">Regisztráció</button>

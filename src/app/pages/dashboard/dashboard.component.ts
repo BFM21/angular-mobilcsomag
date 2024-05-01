@@ -49,7 +49,8 @@ export class DashboardComponent {
 
   constructor(private authService: AuthService, private packageService: PackagesService, private userService: UserService, private afs: AngularFirestore, @Inject(DOCUMENT) private document: Document,) {
     this.myLocalStorage = document.defaultView?.localStorage;
-    this.currentUserId = JSON.parse(localStorage.getItem('user') as string).uid;
+    this.currentUserId = JSON.parse(this.myLocalStorage!.getItem('user') as string).uid;
+    
   }
 
   ngOnInit() {

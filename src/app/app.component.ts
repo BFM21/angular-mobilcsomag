@@ -48,5 +48,11 @@ export class AppComponent {
     
   }
 
+  ngOnDestroy(): void {
+   this.authService.logout();
+    this.currentUser = null;
+    this.myLocalStorage = null;
+  }
+
   
 }

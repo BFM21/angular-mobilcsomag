@@ -20,10 +20,13 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AuthService } from './services/auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {environment} from '../app/environment/environment';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { HoverDirective } from './directives/hover.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HoverDirective,
     
   ],
   imports: [
@@ -46,7 +49,8 @@ import {environment} from '../app/environment/environment';
     AuthService,
     provideClientHydration(),
     provideAnimationsAsync(),
-    provideHttpClient(withFetch())
+    provideHttpClient(withFetch()),
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
   ],
   bootstrap: [AppComponent]
 })

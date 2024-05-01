@@ -21,6 +21,7 @@ export class AuthService {
 
   isUserLoggedIn() {
     return this.auth.user;
+   
   }
 
   register(email: string, password: string) {

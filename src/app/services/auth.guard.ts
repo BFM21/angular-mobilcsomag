@@ -1,11 +1,25 @@
-import { CanActivateFn } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateFn, GuardResult, MaybeAsync, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from './auth.service';
+import { catchError, map, of, take, tap } from 'rxjs';
+import { Inject, Injectable, inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
+@Injectable({
+  providedIn: 'root',
+})
+class AuthGuard {
+  constructor(@Inject(DOCUMENT) private document: Document, private router:Router) {}
 
-export const authGuard: CanActivateFn = (route, state) => {
-  const user = JSON.parse(localStorage.getItem('user') as string);
-  if(user){
+  canActivate():boolean{
+    if (this.document.defaultView!.localStorage.getItem('user') == 'null') {
+      this.router.navigateByUrl('/login');
+      return false;
+    }
     return true;
   }
-  return false;
+}
+
+export const authGuard: CanActivateFn = (route, state) => {
+
+  return inject(AuthGuard).canActivate();
 };

@@ -3,7 +3,7 @@
     width: 35%;
 }
 
-input{
+mat-form-field{
     width: 100%;
     margin-bottom: 5%;
 }
@@ -30,7 +30,7 @@ input{
     color: red;
  }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 1250px) {
     .inline-inputs{
         display: block;
     }

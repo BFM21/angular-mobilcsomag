@@ -1,26 +1,35 @@
 <br>
 <div class="form-box">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="emailInput">Email cím</label>
-          <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" formControlName = "email">
-          <p class='field-message' *ngIf="showRequiredError('email') && submitted">
-            Ez a mező kötelező!
-          </p>
-          <p class='field-message' *ngIf="showEmailFormatError() && submitted">
-            Nem megfelelő email formátum!
-          </p>
-        </div>
-        <div class="form-group">
-          <label for="passwordInput">Jelszó</label>
-          <input type="password" class="form-control" id="passwordInput" formControlName = "password">
-          <p class='field-message' *ngIf="showRequiredError('password') && submitted">
-            Ez a mező kötelező!
-          </p>
-        </div>
-        
-        <button type="submit" mat-flat-button color="primary">Bejelentkezés</button>
-      </form>
-      <br>
-      <a [routerLink] ="'/register'">Nincs fiókod? Regisztrálj itt!</a>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label for="emailInput">Email cím</mat-label>
+        <input matInput  type="email" class="form-control" id="emailInput" aria-describedby="emailHelp"
+          formControlName="email">
+     
+      @if (showRequiredError('email') && loginForm.get('email')!.invalid) {
+        <mat-error>Ez a mezőkötelező!</mat-error>
+      }
+      @if (showEmailFormatError() && loginForm.get('email')!.invalid) {
+        <mat-error>Nem megfelelő email formátum!</mat-error>
+      }
+    </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field>
+      <mat-label for="passwordInput">Jelszó</mat-label>
+      <input matInput type="password" class="form-control" id="passwordInput" formControlName="password">
+    
+      @if (showRequiredError('password') && loginForm.get('password')!.invalid) {
+        <mat-error>Ez a mezőkötelező!</mat-error>
+      }
+    </mat-form-field>
+    </div>
+
+    <button type="submit" mat-flat-button color="primary">Bejelentkezés</button>
+  </form>
+  <br>
+  <a [routerLink]="'/register'">Nincs fiókod? Regisztrálj itt!</a>
 </div>
